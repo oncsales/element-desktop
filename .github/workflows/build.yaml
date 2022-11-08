@@ -120,6 +120,7 @@ jobs:
             arch: x64
           - target: aarch64-unknown-linux-gnu
             arch: aarch64
+            build-args: --arm64
     name: 'Linux (${{ matrix.arch }}) (sqlcipher: ${{ matrix.sqlcipher }})'
     runs-on: ubuntu-latest
     steps:
@@ -154,12 +155,12 @@ jobs:
         run: "yarn install --pure-lockfile"
 
       - name: Build Natives
-        run: "yarn build:native"
+        run: "yarn build:native --target ${{ matrix.target }}"
         env:
           SQLCIPHER_STATIC: ${{ matrix.sqlcipher == 'static' && '1' || '0' }}
 
       - name: Build App
-        run: "yarn build --publish never"
+        run: "yarn build --publish never -l ${{ matrix.build-args }}"
 
       - name: Install .deb
         run: "sudo apt install ./dist/*.deb"
