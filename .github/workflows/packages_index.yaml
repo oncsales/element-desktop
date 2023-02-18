@@ -1,4 +1,4 @@
-name: Generate packages.element.io directory indexes
+name: Generate packages.quicksales.vn directory indexes
 on:
     # Trigger a rebuild of all indexes if the template gets updated
     push:
