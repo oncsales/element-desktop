@@ -1,10 +1,10 @@
-name: Generate packages.element.io directory indexes
+name: Generate packages.quicksales.vn directory indexes
 on:
     # Trigger a rebuild of all indexes if the template gets updated
     push:
         branches: [develop]
         paths:
-            - "packages.element.io/**"
+            - "packages.quicksales.vn/**"
     # Trigger a daily rebuild for (mac-mini built) Nightly builds
     schedule:
         - cron: "0 11 * * *"
@@ -20,9 +20,9 @@ jobs:
         name: "Deploy"
         if: github.event != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
         runs-on: ubuntu-latest
-        environment: packages.element.io
+        environment: packages.quicksales.vn
         env:
-            R2_BUCKET: "packages-element-io"
+            R2_BUCKET: "packages-quicksales-vn"
             R2_URL: ${{ secrets.CF_R2_S3_API }}
         steps:
             - uses: actions/checkout@v3
